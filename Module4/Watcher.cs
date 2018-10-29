@@ -13,6 +13,14 @@ namespace Module4
 {
 	public class Watcher
 	{
+		#region Constants
+
+		private const string defaultFilter = "*.*";
+		private const string dateFormat = "yy-MM-dd-hh-mm-ss";
+		private const string delimiter = "_";
+
+		#endregion
+
 		#region Private fields
 
 		private static readonly WatcherSettings _settings =
@@ -51,7 +59,6 @@ namespace Module4
 			{
 				WatcherInitialize(path);
 			}
-
 		}
 
 		#endregion
@@ -66,7 +73,7 @@ namespace Module4
 			watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
 			   | NotifyFilters.FileName | NotifyFilters.DirectoryName;
 
-			watcher.Filter = "*.*";
+			watcher.Filter = defaultFilter;
 
 			watcher.Changed += new FileSystemEventHandler(OnChanged);
 			watcher.Created += new FileSystemEventHandler(OnChanged);
@@ -94,24 +101,25 @@ namespace Module4
 			switch (rule.FileNameChanged)
 			{
 				case FileNameChanged.Date:
-					fileFullPath = DateTimeOffset.Now.ToString("yy-MM-dd-hh-mm-ss") + fileFullPath;
+					fileFullPath = DateTimeOffset.Now.ToString(dateFormat) + fileFullPath;
 					break;
 
 				case FileNameChanged.Index:
-					fileFullPath = ++rule.Counter + "_" + fileFullPath;
+					fileFullPath = ++rule.Counter + delimiter + fileFullPath;
 					break;
 			}
 
 			return fileFullPath;
 		}
 
-		private void MoveFile(string fileFullPath, string dirPath)
+		private void MoveFile(string fileFullPath, Func<string, string> dirPath)
 		{
 			FileInfo fileInf = new FileInfo(fileFullPath);
-
+			
 			if (fileInf.Exists)
 			{
-				string newPath = string.Concat(dirPath, @"\", RenameFile(fileInf.Name));
+				string newPath = string.Concat(dirPath(fileFullPath), @"\", RenameFile(fileInf.Name));
+
 				try
 				{
 					fileInf.MoveTo(newPath);
@@ -129,11 +137,11 @@ namespace Module4
 		private void OnChanged(object source, FileSystemEventArgs e)
 		{
 			FileInfo fileInfo = new FileInfo(e.FullPath);
-
+			Func<string, string> searchDirByRule = SearchDirByRule;
 			if (fileInfo.Exists)
 			{
 				_logger.Log(string.Format(Messages.ChangedMessage, e.FullPath, fileInfo.CreationTime, e.ChangeType, DateTimeOffset.Now));
-				MoveFile(e.FullPath, SearchDirByRule(e.FullPath));
+				MoveFile(e.FullPath, searchDirByRule);
 			}
 		}
 
@@ -145,6 +153,5 @@ namespace Module4
 		#endregion
 
 		#endregion
-
 	}
 }

@@ -68,7 +68,7 @@ namespace Module05
 		{
 			if (!_registeredObjects.Any(x => x.TypeToResolve == type))
 			{
-				throw new RegisteredException($"Cannot create instance of {type.FullName}. Dependency is not provided");
+				throw new RegisteredException(string.Format(Resources.Resources.DependencyNotProvided, type.FullName));
 			}
 
 			Type dependendType = _registeredObjects.FirstOrDefault(x => x.TypeToResolve == type).ConcreteType;
@@ -110,7 +110,7 @@ namespace Module05
 
 			if (constructors.Length == 0)
 			{
-				throw new RegisteredException($"There are no public constructors for type {type.FullName}");
+				throw new RegisteredException(string.Format(Resources.Resources.NotPublicConstructor, type.FullName));
 			}
 
 			return constructors.First();
@@ -142,7 +142,7 @@ namespace Module05
 			if (registeredObject == null)
 			{
 				throw new RegisteredException(string.Format(
-					"The type {0} has not been registered", typeToResolve.Name));
+					Resources.Resources.NotRegistered, typeToResolve.Name));
 			}
 			return GetInstance(registeredObject);
 		}

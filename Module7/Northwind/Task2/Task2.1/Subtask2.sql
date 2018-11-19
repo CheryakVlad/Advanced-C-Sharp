@@ -1,0 +1,2 @@
+﻿SELECT COUNT(*) - COUNT(ShippedDate) AS 'NOT DELIVERED ORDERS COUNT'
+FROM Northwind.dbo.Orders;

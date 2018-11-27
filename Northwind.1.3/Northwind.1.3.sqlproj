@@ -275,11 +275,11 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="Security\Permissions.sql" />
-    <Build Include="dbo\Post deploy\Categories_Insert.sql" />
-    <Build Include="dbo\Post deploy\Products_Insert.sql" />
-    <Build Include="dbo\Post deploy\Suppliers_Insert.sql" />
+    <None Include="dbo\Post deploy\Categories_Insert.sql" />
+    <None Include="dbo\Post deploy\Products_Insert.sql" />
+    <None Include="dbo\Post deploy\Suppliers_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="dbo\Post deploy\PostDeployment.sql" />
+    <None Include="dbo\Post deploy\PostDeployment.sql" />
   </ItemGroup>
 </Project>

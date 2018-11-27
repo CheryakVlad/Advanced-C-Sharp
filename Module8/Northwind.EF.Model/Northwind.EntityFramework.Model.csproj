@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{071E31BB-017C-44F2-B547-77F50CE8E2C3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Northwind.EF.Model</RootNamespace>
+    <AssemblyName>Northwind.EF.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BusinessEntities\Category.cs" />
+    <Compile Include="BusinessEntities\CreditCard.cs" />
+    <Compile Include="BusinessEntities\Customer.cs" />
+    <Compile Include="BusinessEntities\CustomerDemographic.cs" />
+    <Compile Include="BusinessEntities\Employee.cs" />
+    <Compile Include="Migrations\201811261030319_InitialCreate.cs" />
+    <Compile Include="Migrations\201811261030319_InitialCreate.Designer.cs">
+      <DependentUpon>201811261030319_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811261452487_Version1.1.cs" />
+    <Compile Include="Migrations\201811261452487_Version1.1.Designer.cs">
+      <DependentUpon>201811261452487_Version1.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811261455403_Version1.3.cs" />
+    <Compile Include="Migrations\201811261455403_Version1.3.Designer.cs">
+      <DependentUpon>201811261455403_Version1.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811261501556_Version1.3.1.cs" />
+    <Compile Include="Migrations\201811261501556_Version1.3.1.Designer.cs">
+      <DependentUpon>201811261501556_Version1.3.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Northwind.cs" />
+    <Compile Include="BusinessEntities\Order.cs" />
+    <Compile Include="BusinessEntities\Order_Detail.cs" />
+    <Compile Include="BusinessEntities\Product.cs" />
+    <Compile Include="BusinessEntities\Region.cs" />
+    <Compile Include="BusinessEntities\Shipper.cs" />
+    <Compile Include="BusinessEntities\Supplier.cs" />
+    <Compile Include="BusinessEntities\Territory.cs" />
+    <Compile Include="Queries\Task1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811261030319_InitialCreate.resx">
+      <DependentUpon>201811261030319_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811261452487_Version1.1.resx">
+      <DependentUpon>201811261452487_Version1.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811261455403_Version1.3.resx">
+      <DependentUpon>201811261455403_Version1.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811261501556_Version1.3.1.resx">
+      <DependentUpon>201811261501556_Version1.3.1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ORM.Shared\ORM.Shared.csproj">
+      <Project>{c7b3c65f-a9b8-4d37-94e9-268dd5664cda}</Project>
+      <Name>ORM.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
